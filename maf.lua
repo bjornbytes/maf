@@ -272,8 +272,8 @@ quat = {
 
 if ffi then
   ffi.cdef [[
-    typedef struct { float x, y, z; } vec3;
-    typedef struct { float x, y, z, w; } quat;
+    typedef struct { double x, y, z; } vec3;
+    typedef struct { double x, y, z, w; } quat;
   ]]
 
   vec3 = ffi.metatype('vec3', vec3)
