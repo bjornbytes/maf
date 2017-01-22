@@ -1,7 +1,7 @@
 maf
 ===
 
-A small 3D math library for Lua.
+A small 3D math library for Lua.  Inspired by [cpml](https://github.com/excessive/cpml).
 
 Example
 ---
