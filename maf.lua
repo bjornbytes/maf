@@ -129,7 +129,7 @@ vec3 = {
 }
 
 quat = {
-  __call = function(_, angle, x, y, z)
+  __call = function(_, x, y, z, w)
     return setmetatable({ x = x, y = y, z = z, w = w }, quat)
   end,
 
