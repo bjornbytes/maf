@@ -21,7 +21,11 @@ vec3 = {
     elseif type(u) == 'number' then return v:scale(u, vec3())
     else error('vec3s can only be multiplied by vec3s and numbers') end
   end,
-  __div = function(v, u) return v:div(u, vec3()) end,
+  __div = function(v, u)
+    if vec3.isvec3(u) then return v:div(u, vec3())
+    elseif type(u) == 'number' then return v:scale(1 / u, vec3())
+    else error('vec3s can only be divided by vec3s and numbers') end
+  end,
   __unm = function(v) return v:scale(-1) end,
   __len = function(v) return v:length() end,
 
