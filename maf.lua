@@ -30,8 +30,20 @@ vec3 = {
       return ffi and ffi.istype('vec3', x) or getmetatable(x) == vec3
     end,
 
+    clone = function(v)
+      return vec3(v.x, v.y, v.z)
+    end,
+
     unpack = function(v)
       return v.x, v.y, v.z
+    end,
+
+    set = function(v, x, y, z)
+      if vec3.isvec3(x) then x, y, z = x.x, x.y, x.z end
+      v.x = x
+      v.y = y
+      v.z = z
+      return v
     end,
 
     add = function(v, u, out)
@@ -148,8 +160,21 @@ quat = {
       return ffi and ffi.istype('quat', x) or getmetatable(x) == quat
     end,
 
+    clone = function(q)
+      return quat(q.x, q.y, q.z, q.w)
+    end,
+
     unpack = function(q)
       return q.x, q.y, q.z, q.w
+    end,
+
+    set = function(q, x, y, z, w)
+      if quat.isquat(x) then x, y, z, w = x.x, x.y, x.z, x.w end
+      q.x = x
+      q.y = y
+      q.z = z
+      q.w = w
+      return q
     end,
 
     getAngleAxis = function(q)
@@ -161,7 +186,7 @@ quat = {
 
     -- Set rotation from angle/axis representation
     angleAxis = function(q, angle, x, y, z)
-      if getmetatable(x) == vec3 then x, y, z = x.x, x.y, x.z end
+      if vec3.isvec3(x) then x, y, z = x.x, x.y, x.z end
       local s = math.sin(angle * .5)
       local c = math.cos(angle * .5)
       q.x = x * s
