@@ -114,9 +114,10 @@ vec3 = {
 
     cross = function(v, u, out)
       out = out or v
-      out.x = v.y * u.z - v.z * u.y
-      out.y = v.z * u.x - v.x * u.z
-      out.z = v.x * u.y - v.y * u.x
+      local a, b, c = v.x, v.y, v.z
+      out.x = b * u.z - c * u.y
+      out.y = c * u.x - a * u.z
+      out.z = a * u.y - b * u.x
       return out
     end,
 
