@@ -1,7 +1,16 @@
 maf
 ===
 
-A small 3D math library for Lua.  Inspired by [cpml](https://github.com/excessive/cpml).
+A small 3D math library for Lua.
+
+**Features**
+
+- Single file
+- Uses optimized LuaJIT structs if available
+- Supports vectors and quaternions
+- Provides an ugly API that is garbage-free as well as a pretty API that generates garbage.
+
+Check out [cpml](https://github.com/excessive/cpml) if you're looking for something with more features.
 
 Example
 ---
