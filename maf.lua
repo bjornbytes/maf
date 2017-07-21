@@ -211,7 +211,7 @@ quat = {
         vtmp1.x, vtmp1.y, vtmp1.z = 1, 0, 0
         vtmp1:cross(u)
         if #vtmp1 < .00001 then
-          vtmp1.x, vtmp1.y, vtmp1.y = 0, 1, 0
+          vtmp1.x, vtmp1.y, vtmp1.z = 0, 1, 0
           vtmp1:cross(u)
         end
         vtmp1:normalize()
