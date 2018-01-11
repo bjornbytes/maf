@@ -246,9 +246,9 @@ quat = {
       out = out or q
       local qx, qy, qz, qw = q:unpack()
       local rx, ry, rz, rw = r:unpack()
-      out.x = qx * rw + qw * rx - qy * rz - qz * ry
-      out.y = qy * rw + qw * ry - qz * rx - qx * rz
-      out.z = qz * rw + qw * rz - qx * ry - qy * rx
+      out.x = qx * rw + qw * rx + qy * rz - qz * ry
+      out.y = qy * rw + qw * ry + qz * rx - qx * rz
+      out.z = qz * rw + qw * rz + qx * ry - qy * rx
       out.w = qw * rw - qx * rx - qy * ry - qz * rz
       return out
     end,
