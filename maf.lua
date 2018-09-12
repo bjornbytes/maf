@@ -129,6 +129,17 @@ vec3 = {
       return out
     end,
 
+    project = function(v, u, out)
+      out = out or v
+      local unorm = vtmp1
+      u:normalize(unorm)
+      local dot = v:dot(unorm)
+      out.x = unorm.x * dot
+      out.y = unorm.y * dot
+      out.z = unorm.z * dot
+      return out
+    end,
+
     rotate = function(v, q, out)
       out = out or v
       local u, c, o = vtmp1, vtmp2, out
