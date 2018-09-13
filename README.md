@@ -146,14 +146,14 @@ Get the individual components of the rotation.
 
 Set the individual components of a rotation.  `x` can also be a rotation.
 
-##### `rotation.fromAngleAxis(angle, vector)` or `rotation.fromAngleAxis(angle, x, y, z)`
+##### `rotation.fromAngleAxis(angle, x, y, z)`
 
 Creates a new rotation from an angle/axis pair.  This is the same as creating a new rotation and
-calling `:setAngleAxis` on it.
+calling `:setAngleAxis` on it.  `x` can also be a `vec3`.
 
-##### `rotation:setAngleAxis(angle, vector)` or `rotation:setAngleAxis(angle, x, y, z)`
+##### `rotation:setAngleAxis(angle, x, y, z)`
 
-Set the rotation's values using angle/axis representation.
+Set the rotation's values using angle/axis representation.  `x` can also be a `vec3`.
 
 ##### `angle, x, y, z = rotation:getAngleAxis()`
 
@@ -161,20 +161,22 @@ Get the angle/axis representation of the rotation.
 
 ##### `rotation.between(v1, v2)`
 
-Create a new rotation that represents the rotation between `v1` and `v2`.
+Create a new rotation that represents the rotation between `v1` and `v2`.  Both vectors should be
+normalized.
 
 ##### `rotation:setBetween(v1, v2)`
 
-Update an existing rotation to represent the rotation between `v1` and `v2`.
+Update an existing rotation to represent the rotation between `v1` and `v2`.  Both vectors should be
+normalized.
 
-##### `rotation.fromDirection(vector)` or `rotation.fromDirection(x, y, z)`
+##### `rotation.fromDirection(x, y, z)`
 
 Create a new rotation from a direction vector.  The rotation will represent the rotation from the
-forward vector (0, 0, -1) to the direction vector.
+forward vector (0, 0, -1) to the direction vector.  x can also be a `vec3`.
 
-##### `rotation:setDirection(vector)` or `rotation:setDirection(x, y, z)`
+##### `rotation:setDirection(x, y, z)`
 
-Set a rotation's value to those of the direction vector.
+Set a rotation's value to those of the direction vector.  `x` can also be a `vec3`.
 
 ##### `rotation:add(r2, [out])`
 
