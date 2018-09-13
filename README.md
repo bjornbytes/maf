@@ -125,8 +125,8 @@ Applies a rotation `r` to the vector.
 ##### `maf.rotation(x, y, z, w)` or `maf.quat(x, y, z, w)`
 
 Creates a new rotation (quaternion) from x, y, z, w components.  Unless you are some sort of wizard
-that understands quaternions, it's probably easier to call `:angleAxis` or `:between` on the
-rotation to initialize it.
+that understands quaternions, it's probably easier to use `.fromAngleAxis`, `.fromDirection`, or
+`.between`.
 
 The following metamethods are defined for rotations:
 
@@ -146,17 +146,35 @@ Get the individual components of the rotation.
 
 Set the individual components of a rotation.  `x` can also be a rotation.
 
+##### `rotation.fromAngleAxis(angle, vector)` or `rotation.fromAngleAxis(angle, x, y, z)`
+
+Creates a new rotation from an angle/axis pair.  This is the same as creating a new rotation and
+calling `:setAngleAxis` on it.
+
+##### `rotation:setAngleAxis(angle, vector)` or `rotation:setAngleAxis(angle, x, y, z)`
+
+Set the rotation's values using angle/axis representation.
+
 ##### `angle, x, y, z = rotation:getAngleAxis()`
 
 Get the angle/axis representation of the rotation.
 
-##### `rotation:angleAxis(angle, vector)` or `rotation:angleAxis(angle, x, y, z)`
+##### `rotation.between(v1, v2)`
 
-Set the rotation using angle/axis representation.
+Create a new rotation that represents the rotation between `v1` and `v2`.
 
-##### `rotation:between(v1, v2)`
+##### `rotation:setBetween(v1, v2)`
 
-Set the rotation defined by rotating from `v1` to `v2`.
+Update an existing rotation to represent the rotation between `v1` and `v2`.
+
+##### `rotation.fromDirection(vector)` or `rotation.fromDirection(x, y, z)`
+
+Create a new rotation from a direction vector.  The rotation will represent the rotation from the
+forward vector (0, 0, -1) to the direction vector.
+
+##### `rotation:setDirection(vector)` or `rotation:setDirection(x, y, z)`
+
+Set a rotation's value to those of the direction vector.
 
 ##### `rotation:add(r2, [out])`
 

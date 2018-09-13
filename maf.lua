@@ -5,6 +5,7 @@
 local ffi = type(jit) == 'table' and jit.status() and require 'ffi'
 local vec3, quat
 
+local forward
 local vtmp1
 local vtmp2
 local qtmp1
@@ -193,15 +194,11 @@ quat = {
       return q
     end,
 
-    getAngleAxis = function(q)
-      if q.w > 1 or q.w < -1 then q:normalize() end
-      local s = math.sqrt(1 - q.w * q.w)
-      s = s < .0001 and 1 or 1 / s
-      return 2 * math.acos(q.w), q.x * s, q.y * s, q.z * s
+    fromAngleAxis = function(angle, x, y, z)
+      return quat():setAngleAxis(angle, x, y, z)
     end,
 
-    -- Set rotation from angle/axis representation
-    angleAxis = function(q, angle, x, y, z)
+    setAngleAxis = function(q, angle, x, y, z)
       if vec3.isvec3(x) then x, y, z = x.x, x.y, x.z end
       local s = math.sin(angle * .5)
       local c = math.cos(angle * .5)
@@ -212,8 +209,18 @@ quat = {
       return q
     end,
 
-    -- Set rotation from one vector to another
-    between = function(q, u, v)
+    getAngleAxis = function(q)
+      if q.w > 1 or q.w < -1 then q:normalize() end
+      local s = math.sqrt(1 - q.w * q.w)
+      s = s < .0001 and 1 or 1 / s
+      return 2 * math.acos(q.w), q.x * s, q.y * s, q.z * s
+    end,
+
+    between = function(u, v)
+      return quat():setBetween(u, v)
+    end,
+
+    setBetween = function(q, u, v)
       local dot = u:dot(v)
       if dot > .99999 then
         q.x, q.y, q.z, q.w = 0, 0, 0, 1
@@ -226,13 +233,23 @@ quat = {
           vtmp1:cross(u)
         end
         vtmp1:normalize()
-        return q:angleAxis(math.pi, vtmp1)
+        return q:setAngleAxis(math.pi, vtmp1)
       end
 
       q.x, q.y, q.z = u.x, u.y, u.z
       vec3.cross(q, v)
       q.w = 1 + dot
       return q:normalize()
+    end,
+
+    fromDirection = function(x, y, z)
+      return quat():setDirection(x, y, z)
+    end,
+
+    setDirection = function(q, x, y, z)
+      if vec3.isvec3(x) then x, y, z = x.x, x.y, x.z end
+      vtmp2.x, vtmp2.y, vtmp2.z = x, y, z
+      return q:setBetween(forward, vtmp2)
     end,
 
     add = function(q, r, out)
@@ -324,6 +341,7 @@ else
   setmetatable(quat, quat)
 end
 
+forward = vec3(0, 0, -1)
 vtmp1 = vec3()
 vtmp2 = vec3()
 qtmp1 = quat()
