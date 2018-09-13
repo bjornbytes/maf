@@ -57,6 +57,10 @@ The following metamethods are defined for vectors:
 
 Get the individual components of the vector.
 
+##### `vector:set(x, y, z)`
+
+Set the individual components of a vector.  `x` can also be a vector.
+
 ##### `vector:add(v2, [out])`
 
 Add two vectors.
@@ -108,6 +112,10 @@ Mixes two vectors together using linear interpolation.  The parameter `t` contro
 mixed (0 will return `vector`, 1 will return `v2`, .5 will return a 50/50 blend of the two vectors,
 etc.).
 
+##### `vector:project(u, [out])`
+
+Projects `vector` onto `u`, storing the result in `out`.
+
 ##### `vector:rotate(r, [out])`
 
 Applies a rotation `r` to the vector.
@@ -133,6 +141,10 @@ The following metamethods are defined for rotations:
 ##### `rotation:unpack()`
 
 Get the individual components of the rotation.
+
+##### `rotation:set(x, y, z, w)`
+
+Set the individual components of a rotation.  `x` can also be a rotation.
 
 ##### `angle, x, y, z = rotation:getAngleAxis()`
 
