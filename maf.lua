@@ -15,6 +15,10 @@ vec3 = {
     return setmetatable({ x = x or 0, y = y or 0, z = z or 0 }, vec3)
   end,
 
+  __tostring = function(v)
+    return string.format('(%f, %f, %f)', v.x, v.y, v.z)
+  end,
+
   __add = function(v, u) return v:add(u, vec3()) end,
   __sub = function(v, u) return v:sub(u, vec3()) end,
   __mul = function(v, u)
@@ -160,6 +164,10 @@ vec3 = {
 quat = {
   __call = function(_, x, y, z, w)
     return setmetatable({ x = x, y = y, z = z, w = w }, quat)
+  end,
+
+  __tostring = function(q)
+    return string.format('(%f, %f, %f, %f)', q.x, q.y, q.z, q.w)
   end,
 
   __add = function(q, r) return q:add(r, quat()) end,
