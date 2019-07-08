@@ -22,7 +22,7 @@ local a = maf.vector(1, 2, 3)
 local b = maf.vector(4, 5, 6)
 
 local c = a + b
-local d = maf.rotation():between(a, b)
+local d = maf.rotation.between(a, b)
 
 print(c:unpack())
 print(d:getAngleAxis())
